@@ -105,7 +105,7 @@
     }
     
     .slide-photo-wrapper {
-      width: 280px;
+      width: 364px;
       border-radius: 12px;
       overflow: hidden;
       background: #FFFFFF;
@@ -114,56 +114,16 @@
     }
     
     .slide-photo-wrapper-large {
-      height: 200px;
+      height: 273px;
+    }
+    
+    .slide-photo-wrapper-large-small {
+      width: 346px;
+      height: 259px;
     }
     
     .slide-photo-wrapper-small {
-      height: 160px;
-    }
-    
-    .slide-photo-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-    
-    /* 不同主题的渐变背景 */
-    .slide-bg-lecture {
-      background: linear-gradient(135deg, #1565C0 0%, #42A5F5 100%);
-    }
-    
-    .slide-bg-competition {
-      background: linear-gradient(135deg, #00ACC1 0%, #26C6DA 100%);
-    }
-    
-    .slide-bg-sharing {
-      background: linear-gradient(135deg, #FF6D00 0%, #FFA726 100%);
-    }
-    
-    .slide-bg-achievement {
-      background: linear-gradient(135deg, #7B1FA2 0%, #AB47BC 100%);
-    }
-    
-    .slide-photo-icon {
-      font-size: 48px;
-      color: rgba(255, 255, 255, 0.9);
-    }
-    
-    .slide-photo-label {
-      position: absolute;
-      bottom: 12px;
-      left: 12px;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(4px);
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      color: #FFFFFF;
-      font-family: "Microsoft YaHei", sans-serif;
+      height: 228px;
     }
     
     /* 说明文字 */
@@ -206,18 +166,16 @@
     </div>
     
     <!-- 照片墙内容区 -->
-    <div style="padding-top: 32px; padding-left: 48px; padding-right: 48px;">
+    <div style="padding-top: 16px; padding-left: 48px; padding-right: 48px;">
       <div class="slide-photo-grid">
         
         <!-- 卡片1：学术讲座 - 大尺寸 -->
         <div class="slide-photo-card">
           <div class="slide-photo-wrapper slide-photo-wrapper-large">
-            <div class="slide-photo-placeholder slide-bg-lecture">
-              <i class="fa-solid fa-chalkboard-teacher slide-photo-icon"></i>
-              <span class="slide-photo-label">
-                <i class="fa-solid fa-calendar-alt" style="margin-right: 4px;"></i>2024春季
-              </span>
-            </div>
+            <img src="../images/1.webp" alt="学术讲座活动" style="width: 100%; height: 100%; object-fit: cover;">
+            <span class="slide-photo-label" style="position: absolute; bottom: 12px; left: 12px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(4px); padding: 4px 12px; border-radius: 20px; font-size: 12px; color: #FFFFFF; font-family: 'Microsoft YaHei', sans-serif;">
+              <i class="fa-solid fa-calendar-alt" style="margin-right: 4px;"></i>2025春季
+            </span>
           </div>
           <p class="slide-photo-caption">活动现场照片</p>
         </div>
@@ -225,25 +183,21 @@
         <!-- 卡片2：创新比赛 - 小尺寸 + 上偏移 -->
         <div class="slide-photo-card slide-offset-up">
           <div class="slide-photo-wrapper slide-photo-wrapper-small">
-            <div class="slide-photo-placeholder slide-bg-competition">
-              <i class="fa-solid fa-trophy slide-photo-icon"></i>
-              <span class="slide-photo-label">
-                <i class="fa-solid fa-star" style="margin-right: 4px;"></i>精彩瞬间
-              </span>
-            </div>
+            <img src="../images/2.webp" alt="创新比赛活动" style="width: 100%; height: 100%; object-fit: cover;">
+            <span class="slide-photo-label" style="position: absolute; bottom: 12px; left: 12px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(4px); padding: 4px 12px; border-radius: 20px; font-size: 12px; color: #FFFFFF; font-family: 'Microsoft YaHei', sans-serif;">
+              <i class="fa-solid fa-star" style="margin-right: 4px;"></i>精彩瞬间
+            </span>
           </div>
           <p class="slide-photo-caption">创新比赛活动剪影</p>
         </div>
         
         <!-- 卡片3：资源分享 - 大尺寸 -->
         <div class="slide-photo-card">
-          <div class="slide-photo-wrapper slide-photo-wrapper-large">
-            <div class="slide-photo-placeholder slide-bg-sharing">
-              <i class="fa-solid fa-share-nodes slide-photo-icon"></i>
-              <span class="slide-photo-label">
-                <i class="fa-solid fa-users" style="margin-right: 4px;"></i>互动交流
-              </span>
-            </div>
+          <div class="slide-photo-wrapper slide-photo-wrapper-large-small">
+            <img src="../images/3.webp" alt="资源分享活动" style="width: 100%; height: 100%; object-fit: cover;">
+            <span class="slide-photo-label" style="position: absolute; bottom: 12px; left: 12px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(4px); padding: 4px 12px; border-radius: 20px; font-size: 12px; color: #FFFFFF; font-family: 'Microsoft YaHei', sans-serif;">
+              <i class="fa-solid fa-users" style="margin-right: 4px;"></i>互动交流
+            </span>
           </div>
           <p class="slide-photo-caption">资源分享活动实况</p>
         </div>
@@ -251,12 +205,10 @@
         <!-- 卡片4：成果展示 - 小尺寸 + 下偏移 -->
         <div class="slide-photo-card slide-offset-down">
           <div class="slide-photo-wrapper slide-photo-wrapper-small">
-            <div class="slide-photo-placeholder slide-bg-achievement">
-              <i class="fa-solid fa-award slide-photo-icon"></i>
-              <span class="slide-photo-label">
-                <i class="fa-solid fa-medal" style="margin-right: 4px;"></i>荣誉时刻
-              </span>
-            </div>
+            <img src="../images/4.webp" alt="成果展示活动" style="width: 100%; height: 100%; object-fit: cover;">
+            <span class="slide-photo-label" style="position: absolute; bottom: 12px; left: 12px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(4px); padding: 4px 12px; border-radius: 20px; font-size: 12px; color: #FFFFFF; font-family: 'Microsoft YaHei', sans-serif;">
+              <i class="fa-solid fa-medal" style="margin-right: 4px;"></i>荣誉时刻
+            </span>
           </div>
           <p class="slide-photo-caption">项目成果与获奖展示</p>
         </div>

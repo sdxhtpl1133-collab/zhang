@@ -27,9 +27,10 @@
       width: 100vw;
       height: 100vh;
       background: #F5F9FC;
-      display: flow-root;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       position: relative;
-      margin: 0 auto;
     }
     
     .slide-title {
@@ -38,14 +39,13 @@
       font-weight: 700 !important;
       color: #333333;
       padding-top: 48px;
-      margin-left: 48px;
+      text-align: center;
       line-height: 52px !important;
     }
     
     .slide-grid {
       width: 1184px;
       height: 556px;
-      margin-left: 48px;
       margin-top: 24px;
       display: grid;
       grid-template-columns: 580px 580px;
