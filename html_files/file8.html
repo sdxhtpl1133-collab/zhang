@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>招新流程</title>
+  <script src="https://qn.cache.wpscdn.cn/copilot-test/copilot-cdn/js/tailwindcss@3.4.17.js"></script>
+  <link href="https://qn.cache.wpscdn.cn/copilot-test/copilot-cdn/css/fontawesome-free@6.4.0.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+    
+    .slide-container {
+      display: flow-root;
+      width: 1280px;
+      height: 720px;
+      background-color: #F5F9FC;
+    }
+    
+    .slide-title {
+      font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+      font-size: 36px !important;
+      font-weight: 700 !important;
+      color: #333333;
+      text-align: center;
+      padding-top: 40px;
+    }
+    
+    .slide-main-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1120px;
+      height: 560px;
+      margin: 32px auto 0 auto;
+    }
+    
+    .slide-step-card {
+      width: 280px;
+      height: 380px;
+      background: #FFFFFF;
+      border-radius: 20px;
+      box-shadow: 0 4px 24px rgba(21, 101, 192, 0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 32px;
+      position: relative;
+    }
+    
+    .slide-icon-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 28px;
+    }
+    
+    .slide-icon-circle i {
+      font-size: 32px;
+      color: #FFFFFF;
+    }
+    
+    .slide-icon-blue {
+      background: linear-gradient(135deg, #1565C0, #1976D2);
+    }
+    
+    .slide-icon-cyan {
+      background: linear-gradient(135deg, #00ACC1, #26C6DA);
+    }
+    
+    .slide-icon-orange {
+      background: linear-gradient(135deg, #FF6D00, #FF9100);
+    }
+    
+    .slide-step-number {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 28px;
+      height: 28px;
+      background: #FF6D00;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+    
+    .slide-step-title {
+      font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+      font-size: 20px !important;
+      font-weight: 600 !important;
+      color: #333333;
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .slide-step-desc {
+      font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #666666;
+      text-align: center;
+      margin-top: 12px;
+    }
+    
+    .slide-arrow {
+      width: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .slide-arrow i {
+      font-size: 36px;
+      color: #1565C0;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <h1 class="slide-title">招新流程</h1>
+    
+    <div class="slide-main-area">
+      <div class="slide-step-card">
+        <div class="slide-step-number">1</div>
+        <div class="slide-icon-circle slide-icon-blue">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <h2 class="slide-step-title">填写报名表</h2>
+        <p class="slide-step-desc">线上或线下提交</p>
+      </div>
+      
+      <div class="slide-arrow">
+        <i class="fas fa-chevron-right"></i>
+      </div>
+      
+      <div class="slide-step-card">
+        <div class="slide-step-number">2</div>
+        <div class="slide-icon-circle slide-icon-cyan">
+          <i class="fas fa-comments"></i>
+        </div>
+        <h2 class="slide-step-title">初步筛选与面试</h2>
+        <p class="slide-step-desc">等待通知参与</p>
+      </div>
+      
+      <div class="slide-arrow">
+        <i class="fas fa-chevron-right"></i>
+      </div>
+      
+      <div class="slide-step-card">
+        <div class="slide-step-number">3</div>
+        <div class="slide-icon-circle slide-icon-orange">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <h2 class="slide-step-title">正式加入</h2>
+        <p class="slide-step-desc">参与培训与活动</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

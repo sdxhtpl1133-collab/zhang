@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>往期活动展示</title>
+  <script src="https://qn.cache.wpscdn.cn/copilot-test/copilot-cdn/js/tailwindcss@3.4.17.js"></script>
+  <link href="https://qn.cache.wpscdn.cn/copilot-test/copilot-cdn/css/fontawesome-free@6.4.0.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+      box-sizing: border-box;
+      user-select: none;
+    }
+    
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      background: #F5F9FC;
+      display: flow-root;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* 背景装饰 */
+    .slide-bg-decoration {
+      position: absolute;
+      pointer-events: none;
+    }
+    
+    .slide-bg-circle-1 {
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, rgba(21, 101, 192, 0.08), rgba(0, 172, 193, 0.05));
+      border-radius: 50%;
+      top: -60px;
+      right: 100px;
+    }
+    
+    .slide-bg-circle-2 {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, rgba(255, 109, 0, 0.06), rgba(255, 109, 0, 0.02));
+      border-radius: 50%;
+      bottom: 40px;
+      left: -30px;
+    }
+    
+    .slide-bg-circle-3 {
+      width: 80px;
+      height: 80px;
+      background: rgba(0, 172, 193, 0.06);
+      border-radius: 50%;
+      top: 200px;
+      left: 60px;
+    }
+    
+    /* 标题样式 */
+    .slide-title {
+      font-family: "Microsoft YaHei", "SimHei", sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: #1565C0;
+      letter-spacing: 2px;
+    }
+    
+    /* 标题装饰点 */
+    .slide-title-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    
+    .slide-title-dot-orange {
+      background: #FF6D00;
+    }
+    
+    .slide-title-dot-cyan {
+      background: #00ACC1;
+    }
+    
+    /* 照片墙网格 */
+    .slide-photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 48px;
+      row-gap: 40px;
+    }
+    
+    /* 图片卡片 */
+    .slide-photo-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .slide-photo-wrapper {
+      width: 280px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #FFFFFF;
+      box-shadow: 0 4px 16px rgba(21, 101, 192, 0.12);
+      position: relative;
+    }
+    
+    .slide-photo-wrapper-large {
+      height: 200px;
+    }
+    
+    .slide-photo-wrapper-small {
+      height: 160px;
+    }
+    
+    .slide-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    
+    /* 不同主题的渐变背景 */
+    .slide-bg-lecture {
+      background: linear-gradient(135deg, #1565C0 0%, #42A5F5 100%);
+    }
+    
+    .slide-bg-competition {
+      background: linear-gradient(135deg, #00ACC1 0%, #26C6DA 100%);
+    }
+    
+    .slide-bg-sharing {
+      background: linear-gradient(135deg, #FF6D00 0%, #FFA726 100%);
+    }
+    
+    .slide-bg-achievement {
+      background: linear-gradient(135deg, #7B1FA2 0%, #AB47BC 100%);
+    }
+    
+    .slide-photo-icon {
+      font-size: 48px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .slide-photo-label {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #FFFFFF;
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+    
+    /* 说明文字 */
+    .slide-photo-caption {
+      font-family: "Microsoft YaHei", "SimHei", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #666666;
+      text-align: center;
+      padding-top: 12px;
+    }
+    
+    /* 卡片位置偏移 - 营造瀑布流感 */
+    .slide-offset-up {
+      margin-top: -20px;
+    }
+    
+    .slide-offset-down {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <!-- 背景装饰 -->
+    <div class="slide-bg-decoration slide-bg-circle-1"></div>
+    <div class="slide-bg-decoration slide-bg-circle-2"></div>
+    <div class="slide-bg-decoration slide-bg-circle-3"></div>
+    
+    <!-- 页面标题 -->
+    <div style="padding-top: 40px; padding-left: 48px; padding-right: 48px;">
+      <div class="flex items-center gap-3">
+        <span class="slide-title-dot slide-title-dot-orange"></span>
+        <span class="slide-title-dot slide-title-dot-cyan"></span>
+        <h1 class="slide-title">往期活动展示</h1>
+      </div>
+      <p style="padding-top: 8px; font-family: 'Microsoft YaHei', sans-serif; font-size: 14px; color: #999999;">
+        记录精彩瞬间，展现部门风采
+      </p>
+    </div>
+    
+    <!-- 照片墙内容区 -->
+    <div style="padding-top: 32px; padding-left: 48px; padding-right: 48px;">
+      <div class="slide-photo-grid">
+        
+        <!-- 卡片1：学术讲座 - 大尺寸 -->
+        <div class="slide-photo-card">
+          <div class="slide-photo-wrapper slide-photo-wrapper-large">
+            <div class="slide-photo-placeholder slide-bg-lecture">
+              <i class="fa-solid fa-chalkboard-teacher slide-photo-icon"></i>
+              <span class="slide-photo-label">
+                <i class="fa-solid fa-calendar-alt" style="margin-right: 4px;"></i>2024春季
+              </span>
+            </div>
+          </div>
+          <p class="slide-photo-caption">活动现场照片</p>
+        </div>
+        
+        <!-- 卡片2：创新比赛 - 小尺寸 + 上偏移 -->
+        <div class="slide-photo-card slide-offset-up">
+          <div class="slide-photo-wrapper slide-photo-wrapper-small">
+            <div class="slide-photo-placeholder slide-bg-competition">
+              <i class="fa-solid fa-trophy slide-photo-icon"></i>
+              <span class="slide-photo-label">
+                <i class="fa-solid fa-star" style="margin-right: 4px;"></i>精彩瞬间
+              </span>
+            </div>
+          </div>
+          <p class="slide-photo-caption">创新比赛活动剪影</p>
+        </div>
+        
+        <!-- 卡片3：资源分享 - 大尺寸 -->
+        <div class="slide-photo-card">
+          <div class="slide-photo-wrapper slide-photo-wrapper-large">
+            <div class="slide-photo-placeholder slide-bg-sharing">
+              <i class="fa-solid fa-share-nodes slide-photo-icon"></i>
+              <span class="slide-photo-label">
+                <i class="fa-solid fa-users" style="margin-right: 4px;"></i>互动交流
+              </span>
+            </div>
+          </div>
+          <p class="slide-photo-caption">资源分享活动实况</p>
+        </div>
+        
+        <!-- 卡片4：成果展示 - 小尺寸 + 下偏移 -->
+        <div class="slide-photo-card slide-offset-down">
+          <div class="slide-photo-wrapper slide-photo-wrapper-small">
+            <div class="slide-photo-placeholder slide-bg-achievement">
+              <i class="fa-solid fa-award slide-photo-icon"></i>
+              <span class="slide-photo-label">
+                <i class="fa-solid fa-medal" style="margin-right: 4px;"></i>荣誉时刻
+              </span>
+            </div>
+          </div>
+          <p class="slide-photo-caption">项目成果与获奖展示</p>
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- 底部装饰线 -->
+    <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #1565C0, #00ACC1, #FF6D00);"></div>
+    
+  </div>
+</body>
+</html>

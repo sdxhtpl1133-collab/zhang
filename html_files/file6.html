@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>加入我们的理由</title>
+  <script src="https://qn.cache.wpscdn.cn/copilot-test/copilot-cdn/js/tailwindcss@3.4.17.js"></script>
+  <link href="https://qn.cache.wpscdn.cn/copilot-test/copilot-cdn/css/fontawesome-free@6.4.0.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+      box-sizing: border-box;
+      user-select: none;
+    }
+    
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      background: #F5F9FC;
+      display: flow-root;
+    }
+    
+    .slide-title {
+      font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+      font-size: 36px !important;
+      font-weight: 700 !important;
+      color: #1565C0;
+    }
+    
+    .slide-list-title {
+      font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+      font-size: 22px !important;
+      font-weight: 600 !important;
+      color: #333333;
+    }
+    
+    .slide-list-desc {
+      font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+      font-size: 18px !important;
+      font-weight: 400 !important;
+      color: #666666;
+    }
+    
+    .slide-highlight {
+      color: #FF6D00;
+      font-weight: 600 !important;
+    }
+    
+    .slide-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(21, 101, 192, 0.08);
+    }
+    
+    .slide-icon-wrapper {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1565C0 0%, #00ACC1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .slide-icon-wrapper i {
+      color: #FFFFFF;
+      font-size: 20px;
+    }
+    
+    /* 成长阶梯 CSS绘制 */
+    .slide-stairs-container {
+      width: 320px;
+      height: 400px;
+      position: relative;
+    }
+    
+    .slide-stair {
+      position: absolute;
+      left: 0;
+      height: 60px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .slide-stair-1 {
+      bottom: 20px;
+      width: 280px;
+      background: linear-gradient(135deg, #1565C0 0%, #1976D2 100%);
+    }
+    
+    .slide-stair-2 {
+      bottom: 95px;
+      width: 220px;
+      background: linear-gradient(135deg, #1976D2 0%, #1E88E5 100%);
+    }
+    
+    .slide-stair-3 {
+      bottom: 170px;
+      width: 160px;
+      background: linear-gradient(135deg, #1E88E5 0%, #00ACC1 100%);
+    }
+    
+    .slide-stair-4 {
+      bottom: 245px;
+      width: 100px;
+      background: linear-gradient(135deg, #00ACC1 0%, #26C6DA 100%);
+    }
+    
+    .slide-stair-dot {
+      width: 16px;
+      height: 16px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      position: absolute;
+    }
+    
+    .slide-arrow-up {
+      position: absolute;
+      right: 20px;
+      bottom: 100px;
+      width: 60px;
+      height: 80px;
+    }
+    
+    .slide-arrow-up::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-bottom: 40px solid #FF6D00;
+    }
+    
+    .slide-arrow-up::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 50px;
+      background: #FF6D00;
+      border-radius: 4px;
+    }
+    
+    .slide-arrow-label {
+      position: absolute;
+      right: 10px;
+      bottom: 190px;
+      font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #FF6D00;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <!-- 内容区域 -->
+    <div style="padding-top: 50px; padding-left: 40px; padding-right: 40px;">
+      
+      <!-- 页面标题 -->
+      <div style="height: 50px; display: flex; align-items: center;">
+        <h1 class="slide-title">加入我们的理由</h1>
+      </div>
+      
+      <!-- 主内容区 -->
+      <div style="display: flex; gap: 40px; margin-top: 20px; height: 560px;">
+        
+        <!-- 左侧列表区 60% -->
+        <div class="slide-card" style="width: 720px; height: 560px; padding: 30px 40px; display: flex; flex-direction: column; justify-content: space-evenly;">
+          
+          <!-- 列表项1 -->
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="slide-icon-wrapper">
+              <i class="fa-solid fa-book-open"></i>
+            </div>
+            <div style="flex: 1;">
+              <div class="slide-list-title">提升<span class="slide-highlight">学习效率</span>与方法</div>
+              <div class="slide-list-desc" style="margin-top: 6px;">掌握高效学习技巧，科学管理时间</div>
+            </div>
+          </div>
+          
+          <!-- 列表项2 -->
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="slide-icon-wrapper">
+              <i class="fa-solid fa-lightbulb"></i>
+            </div>
+            <div style="flex: 1;">
+              <div class="slide-list-title">增强<span class="slide-highlight">创新思维</span>与项目经验</div>
+              <div class="slide-list-desc" style="margin-top: 6px;">参与实际项目，培养解决问题能力</div>
+            </div>
+          </div>
+          
+          <!-- 列表项3 -->
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="slide-icon-wrapper">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div style="flex: 1;">
+              <div class="slide-list-title">丰富校园生活，结识<span class="slide-highlight">志同道合</span>的朋友</div>
+              <div class="slide-list-desc" style="margin-top: 6px;">拓展人际圈层，收获真挚友谊</div>
+            </div>
+          </div>
+          
+          <!-- 列表项4 -->
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="slide-icon-wrapper">
+              <i class="fa-solid fa-award"></i>
+            </div>
+            <div style="flex: 1;">
+              <div class="slide-list-title">获得社团<span class="slide-highlight">荣誉证书</span>加分</div>
+              <div class="slide-list-desc" style="margin-top: 6px;">积累个人履历，提升综合竞争力</div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- 右侧视觉区 40% -->
+        <div class="slide-card" style="width: 440px; height: 560px; padding: 30px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          
+          <!-- 成长阶梯图示 -->
+          <div class="slide-stairs-container">
+            
+            <!-- 第四阶（最上） -->
+            <div class="slide-stair slide-stair-4">
+              <div class="slide-stair-dot" style="right: 15px; top: 22px;"></div>
+            </div>
+            
+            <!-- 第三阶 -->
+            <div class="slide-stair slide-stair-3">
+              <div class="slide-stair-dot" style="right: 15px; top: 22px;"></div>
+            </div>
+            
+            <!-- 第二阶 -->
+            <div class="slide-stair slide-stair-2">
+              <div class="slide-stair-dot" style="right: 15px; top: 22px;"></div>
+            </div>
+            
+            <!-- 第一阶（最下） -->
+            <div class="slide-stair slide-stair-1">
+              <div class="slide-stair-dot" style="right: 15px; top: 22px;"></div>
+            </div>
+            
+            <!-- 向上箭头 -->
+            <div class="slide-arrow-up"></div>
+            <div class="slide-arrow-label">成长</div>
+            
+          </div>
+          
+          <!-- 图示说明 -->
+          <div style="text-align: center; margin-top: 20px;">
+            <div class="slide-list-title" style="color: #1565C0;">能力成长阶梯</div>
+            <div class="slide-list-desc" style="margin-top: 8px;">每一步都是向上的台阶</div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+</body>
+</html>

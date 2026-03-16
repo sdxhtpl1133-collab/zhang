@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPT图片演示</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+</head>
+<body>
+    <div class="container">
+        <div class="slideshow" id="slideshow">
+        <!-- 幻灯片将通过JavaScript动态添加 -->
+    </div>
+    </div>
+    
+    <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="slide-indicators" id="slideIndicators">
+        <!-- 这里将添加幻灯片指示器 -->
+    </div>
+    
+    <!-- 已移除计时器控件 -->
+    
+    <!-- 左侧上下导航按钮 -->
+    <div class="nav-buttons left-nav">
+        <button class="nav-btn up-btn" id="leftUpBtn">↑</button>
+        <button class="nav-btn down-btn" id="leftDownBtn">↓</button>
+    </div>
+    
+    <!-- 右侧上下导航按钮 -->
+    <div class="nav-buttons right-nav">
+        <button class="nav-btn up-btn" id="rightUpBtn">↑</button>
+        <button class="nav-btn down-btn" id="rightDownBtn">↓</button>
+    </div>
+    
+    <button class="fullscreen-btn" id="fullscreenBtn">⛶</button>
+
+    <script>
+        // 幻灯片数据 - 使用html_files目录中的HTML文件
+        const slides = [
+            { src: 'html_files/file1.html', alt: '幻灯片 1' },
+            { src: 'html_files/file2.html', alt: '幻灯片 2' },
+            { src: 'html_files/file3.html', alt: '幻灯片 3' },
+            { src: 'html_files/file4.html', alt: '幻灯片 4' },
+            { src: 'html_files/file5.html', alt: '幻灯片 5' },
+            { src: 'html_files/file6.html', alt: '幻灯片 6' },
+            { src: 'html_files/file7.html', alt: '幻灯片 7' },
+            { src: 'html_files/file8.html', alt: '幻灯片 8' },
+            { src: 'html_files/file9.html', alt: '幻灯片 9' },
+            { src: 'html_files/file10.html', alt: '幻灯片 10' },
+            { src: 'html_files/file11.html', alt: '幻灯片 11' }
+        ];
+        
+        // 预加载的幻灯片数量
+        const PRELOAD_COUNT = 2;
+        
+        // 获取DOM元素
+        const slideshow = document.getElementById('slideshow');
+        const slideIndicators = document.getElementById('slideIndicators');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressBar = document.getElementById('progressBar');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        
+        // 全局变量
+        let currentSlide = 0;
+        let isPlaying = false;
+        let slideInterval;
+        let progressInterval;
+        const slideDuration = 5000; // 每张幻灯片播放时间（毫秒）
+        let startTime;
+        let isInitialized = false;
+        let preloadedImages = new Map();
+        
+        // 移除动画类型配置
+        
+        // 初始化幻灯片
+        function initSlides() {
+            // 清空现有的幻灯片
+            slideshow.innerHTML = '';
+            slideIndicators.innerHTML = '';
+            
+            // 如果没有幻灯片，显示提示信息
+            if (slides.length === 0) {
+                const noSlidesMessage = document.createElement('div');
+                noSlidesMessage.textContent = '没有找到幻灯片，请检查图片路径';
+                noSlidesMessage.style.cssText = `
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    color: #fff;
+                    font-size: 18px;
+                    text-align: center;
+                `;
+                slideshow.appendChild(noSlidesMessage);
+                return;
+            }
+            
+            // 创建幻灯片和指示器
+            slides.forEach((slide, index) => {
+                // 创建幻灯片元素
+                const slideElement = document.createElement('div');
+                slideElement.classList.add('slide');
+                slideElement.dataset.index = index;
+                
+                // 移除动画类添加
+                
+                if (index === currentSlide) {
+                    slideElement.classList.add('active');
+                }
+                
+                // 创建加载中动画
+                const spinnerElement = document.createElement('div');
+                spinnerElement.classList.add('loading-spinner');
+                slideElement.appendChild(spinnerElement);
+                
+                // 创建iframe元素加载HTML文件
+                const iframeElement = document.createElement('iframe');
+                iframeElement.src = slide.src;
+                iframeElement.alt = slide.alt || `幻灯片 ${index + 1}`;
+                iframeElement.classList.add('loading');
+                iframeElement.style.width = '100%';
+                iframeElement.style.height = '100%';
+                iframeElement.style.border = 'none';
+                iframeElement.style.background = '#fff';
+                
+                // 处理iframe加载完成
+                iframeElement.onload = function() {
+                    this.classList.remove('loading');
+                    spinnerElement.style.display = 'none';
+                };
+                
+                // 处理iframe加载失败
+                iframeElement.onerror = function() {
+                    console.error(`无法加载HTML文件: ${slide.src}`);
+                    spinnerElement.style.display = 'none';
+                    this.src = 'data:text/html;charset=utf-8,%3Chtml%3E%3Cbody%3E%3Cdiv style%3D%22display%3Aflex%3Bjustify-content%3Acenter%3Balign-items%3Acenter%3Bheight%3A100%25%3Bfont-size%3A20px%3Bcolor%3A%23666%22%3EHTML文件加载失败%3C%2Fdiv%3E%3C%2Fbody%3E%3C%2Fhtml%3E';
+                    this.classList.remove('loading');
+                };
+                
+                slideElement.appendChild(iframeElement);
+                slideshow.appendChild(slideElement);
+                
+                // 创建指示器
+                const indicator = document.createElement('div');
+                indicator.classList.add('indicator');
+                indicator.dataset.index = index;
+                if (index === currentSlide) {
+                    indicator.classList.add('active');
+                }
+                
+                // 添加点击事件
+                indicator.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+                
+                slideIndicators.appendChild(indicator);
+            });
+        }
+        
+        // 预加载图片
+        function preloadImages() {
+            // 预加载当前幻灯片及其前后的幻灯片
+            for (let i = -PRELOAD_COUNT; i <= PRELOAD_COUNT; i++) {
+                const index = (currentSlide + i + slides.length) % slides.length;
+                if (index >= 0 && index < slides.length && slides[index]) {
+                    const slide = slides[index];
+                    if (!preloadedImages.has(slide.src)) {
+                        const img = new Image();
+                        img.onload = function() {
+                            preloadedImages.set(slide.src, slide.src);
+                        };
+                        img.src = slide.src;
+                    }
+                }
+            }
+        }
+        
+        // 移除动画类函数
+        
+        // 移除动画类型切换函数
+        
+        // 切换到指定幻灯片 - 简化重写版本
+        function goToSlide(newIndex) {
+            try {
+                // 确保newIndex是有效数字
+                newIndex = parseInt(newIndex);
+                if (isNaN(newIndex)) {
+                    showTempMessage('无效的幻灯片索引', 2000);
+                    return;
+                }
+                
+                // 循环索引处理
+                if (newIndex < 0) {
+                    newIndex = slides.length - 1;
+                } else if (newIndex >= slides.length) {
+                    newIndex = 0;
+                }
+                
+                // 避免不必要的切换
+                if (newIndex === currentSlide) {
+                    return;
+                }
+                
+                // 使用简单直接的方式获取和操作幻灯片元素
+                const allSlides = document.querySelectorAll('.slide');
+                const totalSlides = allSlides.length;
+                
+                // 确保有幻灯片元素
+                if (totalSlides === 0) {
+                    showTempMessage('无幻灯片可显示', 2000);
+                    return;
+                }
+                
+                // 隐藏所有幻灯片
+                for (let i = 0; i < totalSlides; i++) {
+                    allSlides[i].classList.remove('active');
+                }
+                
+                // 确保目标幻灯片存在
+                if (newIndex >= 0 && newIndex < totalSlides) {
+                    // 显示目标幻灯片
+                    allSlides[newIndex].classList.add('active');
+                    // 更新当前索引
+                    currentSlide = newIndex;
+                    
+                    // 调用单独的updateIndicators函数，保持代码一致性
+                    updateIndicators();
+                    
+                    // 调用单独的resetProgressBar函数
+                    resetProgressBar();
+                    
+                    // 显示成功消息
+                    showTempMessage(`第 ${currentSlide + 1} 张 / 共 ${slides.length} 张`, 500);
+                } else {
+                    showTempMessage('指定的幻灯片不存在', 2000);
+                }
+            } catch (e) {
+                // 异常情况下显示友好错误
+                showTempMessage('切换幻灯片时发生错误', 2000);
+            }
+        }
+        
+        // 上一张幻灯片
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+        
+        // 下一张幻灯片
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+        
+        // 更新指示器状态
+        function updateIndicators() {
+            const indicators = document.querySelectorAll('.indicator');
+            indicators.forEach((indicator, index) => {
+                if (index === currentSlide) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+        
+        // 重置进度条（简化版，移除计时器相关代码）
+        function resetProgressBar() {
+            if (progressBar) {
+                progressBar.style.width = '0%';
+            }
+        }
+        
+        // 更新进度条（简化版，不依赖计时器）
+        function updateProgressBar() {
+            // 保留这个函数但简化它，进度条将根据手动切换来重置
+            // 移除自动切换功能，因为计时器功能已被删除
+        }
+        
+        // 播放/暂停切换
+        function togglePlayPause() {
+            if (isPlaying) {
+                pauseSlideshow();
+            } else {
+                playSlideshow();
+            }
+        }
+        
+        // 播放幻灯片
+        function playSlideshow() {
+            try {
+                isPlaying = true;
+                if (playPauseBtn) {
+                    playPauseBtn.textContent = '⏸';
+                }
+                resetProgressBar();
+                
+                // 清除可能存在的旧定时器
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, slideDuration);
+            } catch (error) {
+                console.error('播放幻灯片时出错:', error);
+                showTempMessage('播放失败', 2000);
+            }
+        }
+        
+        // 暂停幻灯片
+        function pauseSlideshow() {
+            try {
+                isPlaying = false;
+                if (playPauseBtn) {
+                    playPauseBtn.textContent = '▶';
+                }
+                clearInterval(slideInterval);
+            } catch (error) {
+                console.error('暂停幻灯片时出错:', error);
+            }
+        }
+        
+        // 切换全屏模式
+        function toggleFullscreen() {
+            try {
+                if (!document.fullscreenElement) {
+                    const element = slideshow || document.documentElement;
+                    if (element.requestFullscreen) {
+                        element.requestFullscreen();
+                    } else if (element.mozRequestFullScreen) { // Firefox
+                        element.mozRequestFullScreen();
+                    } else if (element.webkitRequestFullscreen) { // Chrome, Safari
+                        element.webkitRequestFullscreen();
+                    } else if (element.msRequestFullscreen) { // IE/Edge
+                        element.msRequestFullscreen();
+                    }
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.mozCancelFullScreen) { // Firefox
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) { // Chrome, Safari
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) { // IE/Edge
+                        document.msExitFullscreen();
+                    }
+                }
+            } catch (err) {
+                console.error(`全屏切换错误: ${err.message}`);
+                showTempMessage('无法切换全屏模式', 2000);
+            }
+        }
+        
+        // 添加键盘事件监听
+        function addKeyboardListeners() {
+            document.addEventListener('keydown', (e) => {
+                try {
+                    // 忽略输入框中的按键事件
+                    const target = e.target;
+                    if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+                        return;
+                    }
+                    
+                    switch (e.key) {
+                        case 'ArrowLeft':
+                            prevSlide();
+                            break;
+                        case 'ArrowRight':
+                            nextSlide();
+                            break;
+                        case 'f':
+                        case 'F':
+                            toggleFullscreen();
+                            break;
+                        case 'Escape':
+                            if (document.fullscreenElement) {
+                                document.exitFullscreen();
+                            }
+                            break;
+                        // 移除动画类型快捷键
+                        // case 'a':
+                        // case 'A':
+                        //     // 切换动画类型
+                        //     const newAnimation = cycleAnimationType();
+                        //     showTempMessage(`动画类型: ${newAnimation}`, 1000);
+                        //     break;
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                            // 直接跳转到指定幻灯片（按数字键）
+                            const slideNum = parseInt(e.key) - 1;
+                            if (slideNum >= 0 && slideNum < slides.length) {
+                                goToSlide(slideNum);
+                            }
+                            break;
+                    }
+                } catch (error) {
+                    console.error('处理键盘事件时出错:', error);
+                }
+            });
+        }
+        
+        // 初始化事件监听器
+        function initEventListeners() {
+            fullscreenBtn.addEventListener('click', toggleFullscreen);
+            
+            // 添加导航按钮事件监听
+            const leftUpBtn = document.getElementById('leftUpBtn');
+            const leftDownBtn = document.getElementById('leftDownBtn');
+            const rightUpBtn = document.getElementById('rightUpBtn');
+            const rightDownBtn = document.getElementById('rightDownBtn');
+            
+            if (leftUpBtn) leftUpBtn.addEventListener('click', prevSlide);
+            if (leftDownBtn) leftDownBtn.addEventListener('click', nextSlide);
+            if (rightUpBtn) rightUpBtn.addEventListener('click', prevSlide);
+            if (rightDownBtn) rightDownBtn.addEventListener('click', nextSlide);
+            
+            // 处理单击和双击事件
+            let clickTimer;
+            slideshow.addEventListener('click', (e) => {
+                // 确保点击的是幻灯片背景、图片或iframe
+                if (e.target === slideshow || e.target.tagName === 'IMG' || e.target.tagName === 'IFRAME') {
+                    // 清除之前的定时器（如果存在）
+                    if (clickTimer) {
+                        clearTimeout(clickTimer);
+                    }
+                    
+                    // 设置新的定时器来检测双击
+                    clickTimer = setTimeout(() => {
+                        // 单击事件：下一页
+                        nextSlide();
+                        clickTimer = null;
+                    }, 300); // 300ms作为单击和双击的阈值
+                }
+            });
+            
+            slideshow.addEventListener('dblclick', (e) => {
+                // 确保点击的是幻灯片背景、图片或iframe
+                if (e.target === slideshow || e.target.tagName === 'IMG' || e.target.tagName === 'IFRAME') {
+                    // 清除单击定时器，防止触发单击事件
+                    if (clickTimer) {
+                        clearTimeout(clickTimer);
+                        clickTimer = null;
+                    }
+                    
+                    // 双击事件：上一页
+                    prevSlide();
+                }
+            });
+            
+            // 为iframe添加透明覆盖层，确保点击事件能够被捕获
+            slideshow.addEventListener('DOMNodeInserted', (e) => {
+                if (e.target.tagName === 'IFRAME') {
+                    const iframe = e.target;
+                    const overlay = document.createElement('div');
+                    overlay.style.position = 'absolute';
+                    overlay.style.top = '0';
+                    overlay.style.left = '0';
+                    overlay.style.width = '100%';
+                    overlay.style.height = '100%';
+                    overlay.style.pointerEvents = 'auto';
+                    overlay.style.zIndex = '1';
+                    
+                    // 添加到iframe的父容器
+                    const parent = iframe.parentElement;
+                    if (parent) {
+                        parent.style.position = 'relative';
+                        parent.appendChild(overlay);
+                    }
+                }
+            });
+            
+            // 添加键盘事件监听
+            addKeyboardListeners();
+            
+            // 监听全屏状态变化
+            document.addEventListener('fullscreenchange', () => {
+                if (document.fullscreenElement) {
+                    fullscreenBtn.textContent = '⤦';
+                } else {
+                    fullscreenBtn.textContent = '⛶';
+                }
+            });
+        }
+        
+        // 显示临时消息
+        function showTempMessage(message, duration = 2000) {
+            // 检查是否已存在消息元素
+            let messageElement = document.getElementById('tempMessage');
+            
+            if (!messageElement) {
+                // 创建消息元素
+                messageElement = document.createElement('div');
+                messageElement.id = 'tempMessage';
+                messageElement.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: rgba(0, 0, 0, 0.8);
+                    color: white;
+                    padding: 15px 30px;
+                    border-radius: 5px;
+                    z-index: 1000;
+                    font-size: 16px;
+                    backdrop-filter: blur(5px);
+                    transition: opacity 0.3s, transform 0.3s;
+                `;
+                document.body.appendChild(messageElement);
+            }
+            
+            // 设置消息内容并显示
+            messageElement.textContent = message;
+            messageElement.style.opacity = '1';
+            messageElement.style.transform = 'translate(-50%, -50%) scale(1)';
+            
+            // 定时隐藏
+            setTimeout(() => {
+                messageElement.style.opacity = '0';
+                messageElement.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                
+                // 完全隐藏后可以移除元素（可选）
+                setTimeout(() => {
+                    if (messageElement.parentNode) {
+                        messageElement.parentNode.removeChild(messageElement);
+                    }
+                }, 300);
+            }, duration);
+        }
+        
+        // 初始化函数
+        function init() {
+            if (isInitialized) return;
+            
+            try {
+                // 预加载初始幻灯片
+                preloadImages();
+                
+                // 初始化幻灯片
+                initSlides();
+                
+                // 初始化事件监听器
+                initEventListeners();
+                
+                // 计时器已移除
+                
+                // 更新进度条
+                clearInterval(progressInterval);
+                progressInterval = setInterval(updateProgressBar, 100);
+                
+                isInitialized = true;
+                
+                // 显示使用提示
+                setTimeout(() => {
+                    showTempMessage('单击下一页，双击上一页，← → 键切换幻灯片，F 键全屏', 3000);
+                }, 1000);
+            } catch (error) {
+                console.error('初始化时出错:', error);
+                showTempMessage('初始化失败，请刷新页面重试', 3000);
+            }
+        }
+        
+        // 页面卸载时清理资源
+        window.addEventListener('beforeunload', () => {
+            clearInterval(slideInterval);
+            clearInterval(progressInterval);
+            // 清理其他资源
+            preloadedImages.clear();
+        });
+        
+        // 窗口大小变化时调整
+        window.addEventListener('resize', () => {
+            // 可以在这里添加响应式调整逻辑
+        });
+        
+        // 检测页面可见性变化
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && isPlaying) {
+                // 页面不可见时暂停播放以节省资源
+                pauseSlideshow();
+            }
+        });
+        
+        // 页面加载完成后初始化
+        if (document.readyState === 'loading') {
+            window.addEventListener('DOMContentLoaded', init);
+        } else {
+            // 如果DOM已经加载完成，直接初始化
+            init();
+        }
+    </script>
+</body>
+</html>

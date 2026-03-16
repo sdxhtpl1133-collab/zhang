@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>招新要求</title>
+  <script src="https://qn.cache.wpscdn.cn/copilot-test/copilot-cdn/js/tailwindcss@3.4.17.js"></script>
+  <link href="https://qn.cache.wpscdn.cn/copilot-test/copilot-cdn/css/fontawesome-free@6.4.0.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+      box-sizing: border-box;
+      user-select: none;
+    }
+    
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(135deg, #F5F9FC 0%, #E8F4F8 50%, #F0F7FC 100%);
+      display: flow-root;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* 角落装饰 - 右上角 */
+    .corner-decoration {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0, 172, 193, 0.15), rgba(255, 109, 0, 0.08));
+      z-index: 1;
+    }
+    
+    /* 角落装饰 - 左下角 */
+    .corner-left-bottom {
+      position: absolute;
+      bottom: -50px;
+      left: -30px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(21, 101, 192, 0.12), rgba(0, 172, 193, 0.08));
+      z-index: 1;
+    }
+    
+    /* 校园建筑剪影装饰 */
+    .campus-silhouette {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 140px;
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    .building {
+      position: absolute;
+      bottom: 0;
+      background: rgba(21, 101, 192, 0.06);
+    }
+    
+    .building-1 {
+      left: 60px;
+      width: 80px;
+      height: 90px;
+    }
+    
+    .building-2 {
+      left: 150px;
+      width: 50px;
+      height: 60px;
+    }
+    
+    .building-3 {
+      left: 210px;
+      width: 100px;
+      height: 110px;
+    }
+    
+    .building-4 {
+      right: 180px;
+      width: 70px;
+      height: 75px;
+    }
+    
+    .building-5 {
+      right: 80px;
+      width: 90px;
+      height: 95px;
+    }
+    
+    .building-6 {
+      right: 260px;
+      width: 60px;
+      height: 50px;
+    }
+    
+    /* 窗户装饰 */
+    .building::before {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 14px;
+      background: rgba(255, 255, 255, 0.3);
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .building::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 14px;
+      background: rgba(255, 255, 255, 0.3);
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    /* 标题区 */
+    .title-section {
+      width: 100%;
+      height: 80px;
+      padding-top: 40px;
+      padding-left: 60px;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .page-title {
+      font-size: 36px !important;
+      font-weight: 700 !important;
+      color: #1565C0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .page-title::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 36px;
+      background: linear-gradient(180deg, #1565C0, #00ACC1);
+      margin-right: 16px;
+      border-radius: 3px;
+    }
+    
+    /* 卡片容器 */
+    .cards-container {
+      width: 1160px;
+      height: 516px;
+      margin-left: 60px;
+      margin-top: 36px;
+      display: flex;
+      gap: 40px;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+    
+    /* 单张卡片 */
+    .requirement-card {
+      width: 260px;
+      height: 420px;
+      background: #FFFFFF;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(21, 101, 192, 0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 24px;
+      position: relative;
+    }
+    
+    /* 卡片顶部渐变条 */
+    .requirement-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #1565C0, #00ACC1);
+      border-radius: 20px 20px 0 0;
+    }
+    
+    /* 图标容器 */
+    .card-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1565C0, #00ACC1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 36px;
+    }
+    
+    .card-icon i {
+      font-size: 32px;
+      color: #FFFFFF;
+    }
+    
+    /* 卡片文字 */
+    .card-text {
+      font-size: 18px !important;
+      font-weight: 500 !important;
+      color: #333333;
+      line-height: 1.6;
+      text-align: center;
+      margin-top: 32px;
+      max-width: 212px;
+    }
+    
+    /* 人物剪影装饰 */
+    .silhouette-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-top: auto;
+      gap: 8px;
+    }
+    
+    .person-silhouette {
+      background: rgba(21, 101, 192, 0.08);
+      border-radius: 50% 50% 0 0;
+    }
+    
+    .person-1 {
+      width: 28px;
+      height: 48px;
+    }
+    
+    .person-2 {
+      width: 24px;
+      height: 42px;
+    }
+    
+    .person-3 {
+      width: 30px;
+      height: 52px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <!-- 角落装饰 -->
+    <div class="corner-decoration"></div>
+    <div class="corner-left-bottom"></div>
+    
+    <!-- 校园建筑剪影 -->
+    <div class="campus-silhouette">
+      <div class="building building-1"></div>
+      <div class="building building-2"></div>
+      <div class="building building-3"></div>
+      <div class="building building-6"></div>
+      <div class="building building-4"></div>
+      <div class="building building-5"></div>
+    </div>
+    
+    <!-- 标题区 -->
+    <div class="title-section">
+      <h1 class="page-title">招新要求</h1>
+    </div>
+    
+    <!-- 卡片区 -->
+    <div class="cards-container">
+      <!-- 卡片1 -->
+      <div class="requirement-card">
+        <div class="card-icon">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <p class="card-text">热爱学习<br>具备创新意识</p>
+        <div class="silhouette-container">
+          <div class="person-silhouette person-1"></div>
+          <div class="person-silhouette person-2"></div>
+          <div class="person-silhouette person-3"></div>
+        </div>
+      </div>
+      
+      <!-- 卡片2 -->
+      <div class="requirement-card">
+        <div class="card-icon">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <p class="card-text">愿意参与社团组织的活动和项目</p>
+        <div class="silhouette-container">
+          <div class="person-silhouette person-3"></div>
+          <div class="person-silhouette person-1"></div>
+          <div class="person-silhouette person-2"></div>
+        </div>
+      </div>
+      
+      <!-- 卡片3 -->
+      <div class="requirement-card">
+        <div class="card-icon">
+          <i class="fa-solid fa-users"></i>
+        </div>
+        <p class="card-text">有团队合作精神和责任心</p>
+        <div class="silhouette-container">
+          <div class="person-silhouette person-2"></div>
+          <div class="person-silhouette person-3"></div>
+          <div class="person-silhouette person-1"></div>
+        </div>
+      </div>
+      
+      <!-- 卡片4 -->
+      <div class="requirement-card">
+        <div class="card-icon">
+          <i class="fa-solid fa-face-smile"></i>
+        </div>
+        <p class="card-text">不限专业<br>欢迎各年级同学加入</p>
+        <div class="silhouette-container">
+          <div class="person-silhouette person-1"></div>
+          <div class="person-silhouette person-3"></div>
+          <div class="person-silhouette person-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

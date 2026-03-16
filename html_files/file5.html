@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我们能提供</title>
+  <script src="https://qn.cache.wpscdn.cn/copilot-test/copilot-cdn/js/tailwindcss@3.4.17.js"></script>
+  <link href="https://qn.cache.wpscdn.cn/copilot-test/copilot-cdn/css/fontawesome-free@6.4.0.css" rel="stylesheet" />
+  <script src="https://qn.cache.wpscdn.cn/copilot-test/copilot-cdn/js/echarts@5.4.3.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+      box-sizing: border-box;
+      user-select: none;
+    }
+    
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      background: #F5F9FC;
+      display: flow-root;
+      position: relative;
+      margin: 0 auto;
+    }
+    
+    .slide-title {
+      font-family: "Microsoft YaHei", "SimHei", "微软雅黑", "黑体", sans-serif;
+      font-size: 36px !important;
+      font-weight: 700 !important;
+      color: #333333;
+      padding-top: 48px;
+      margin-left: 48px;
+      line-height: 52px !important;
+    }
+    
+    .slide-grid {
+      width: 1184px;
+      height: 556px;
+      margin-left: 48px;
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 580px 580px;
+      grid-template-rows: 268px 268px;
+      gap: 24px 20px;
+    }
+    
+    .slide-card {
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+    
+    .slide-card-blue {
+      background: #1565C0;
+    }
+    
+    .slide-card-cyan {
+      background: #00ACC1;
+    }
+    
+    .slide-card-orange {
+      background: #FF6D00;
+    }
+    
+    .slide-card-gradient {
+      background: linear-gradient(135deg, #1565C0 0%, #00ACC1 100%);
+    }
+    
+    .slide-card-icon {
+      font-size: 48px;
+      color: #FFFFFF;
+      margin-bottom: 20px;
+    }
+    
+    .slide-card-title {
+      font-family: "Microsoft YaHei", "SimHei", "微软雅黑", "黑体", sans-serif;
+      font-size: 22px !important;
+      font-weight: 600 !important;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    
+    .slide-card-desc {
+      font-family: "Microsoft YaHei", "SimHei", "微软雅黑", "黑体", sans-serif;
+      font-size: 18px !important;
+      font-weight: 400 !important;
+      color: rgba(255, 255, 255, 0.9);
+      text-align: center;
+      line-height: 1.5 !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <h1 class="slide-title">我们能提供</h1>
+    
+    <div class="slide-grid">
+      <!-- 左上色块：学术讲座与分享会 -->
+      <div class="slide-card slide-card-blue">
+        <i class="fa-solid fa-chalkboard-user slide-card-icon"></i>
+        <h2 class="slide-card-title">学术讲座与分享会</h2>
+        <p class="slide-card-desc">分享知识与经验</p>
+      </div>
+      
+      <!-- 右上色块：创新项目与实践活动 -->
+      <div class="slide-card slide-card-cyan">
+        <i class="fa-solid fa-rocket slide-card-icon"></i>
+        <h2 class="slide-card-title">创新项目与实践活动</h2>
+        <p class="slide-card-desc">参与项目，提升实践能力与创新思维</p>
+      </div>
+      
+      <!-- 左下色块：学习资料与资源共享 -->
+      <div class="slide-card slide-card-orange">
+        <i class="fa-solid fa-folder-open slide-card-icon"></i>
+        <h2 class="slide-card-title">学习资料与资源共享</h2>
+        <p class="slide-card-desc">丰富的学习资源库，助力高效学习与知识积累</p>
+      </div>
+      
+      <!-- 右下色块：团队合作与社交机会 -->
+      <div class="slide-card slide-card-gradient">
+        <i class="fa-solid fa-handshake slide-card-icon"></i>
+        <h2 class="slide-card-title">团队合作与社交机会</h2>
+        <p class="slide-card-desc">结识志同道合的伙伴，共同成长与进步</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
