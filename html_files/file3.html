@@ -22,6 +22,100 @@
       height: 100%;
       overflow: hidden;
     }
+    
+    /* 响应式设计 */
+    @media (max-width: 1024px) {
+      #slide-container {
+        padding-top: 30px;
+        padding-left: 32px;
+        padding-right: 32px;
+      }
+      
+      #slide-container h1 {
+        font-size: 30px !important;
+      }
+      
+      #slide-container .slide-card {
+        padding: 16px;
+      }
+      
+      #slide-container .slide-card-title {
+        font-size: 18px !important;
+      }
+      
+      #slide-container .slide-card-desc {
+        font-size: 16px !important;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      #slide-container {
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      
+      #slide-container .slide-main-area {
+        flex-direction: column;
+        height: auto;
+        gap: 20px;
+        padding-top: 20px;
+      }
+      
+      #slide-container .slide-left-content {
+        width: 100%;
+        height: auto;
+      }
+      
+      #slide-container .slide-right-content {
+        width: 100%;
+        height: 300px;
+      }
+      
+      #slide-container h1 {
+        font-size: 24px !important;
+      }
+      
+      #slide-container .slide-card {
+        padding: 12px;
+      }
+      
+      #slide-container .slide-card-title {
+        font-size: 16px !important;
+      }
+      
+      #slide-container .slide-card-desc {
+        font-size: 14px !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      #slide-container {
+        padding-top: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      
+      #slide-container h1 {
+        font-size: 20px !important;
+      }
+      
+      #slide-container .slide-card {
+        padding: 10px;
+      }
+      
+      #slide-container .slide-card-title {
+        font-size: 14px !important;
+      }
+      
+      #slide-container .slide-card-desc {
+        font-size: 12px !important;
+      }
+      
+      #slide-container .slide-right-content {
+        height: 250px;
+      }
+    }
   </style>
 </head>
 <body>

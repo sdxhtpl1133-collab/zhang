@@ -26,6 +26,40 @@ body {
     background-color: #000;
 }
 
+/* 全屏模式样式 */
+html:fullscreen, body:fullscreen, .container:fullscreen, .slideshow:fullscreen {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+/* 不同浏览器的全屏伪类 */
+html:-webkit-full-screen, body:-webkit-full-screen, .container:-webkit-full-screen, .slideshow:-webkit-full-screen {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+html:-moz-full-screen, body:-moz-full-screen, .container:-moz-full-screen, .slideshow:-moz-full-screen {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+html:-ms-fullscreen, body:-ms-fullscreen, .container:-ms-fullscreen, .slideshow:-ms-fullscreen {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
 .slide {
     position: absolute;
     top: 0;

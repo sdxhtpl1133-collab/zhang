@@ -38,7 +38,7 @@
     
     .slide-left-nav {
       width: 427px;
-      height: 720px;
+      height: 100%;
       background: linear-gradient(180deg, #1565C0 0%, #00ACC1 100%);
       display: flex;
       flex-direction: column;
@@ -168,8 +168,8 @@
     }
     
     .slide-right-content {
-      width: 853px;
-      height: 720px;
+      flex: 1;
+      height: 100%;
       background: #F5F9FC;
       display: flex;
       align-items: center;
@@ -212,6 +212,128 @@
       font-weight: 500;
       color: #333333;
       font-family: "Microsoft YaHei", Arial, sans-serif;
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 1024px) {
+      .slide-left-nav {
+        width: 300px;
+        padding-top: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+      
+      .slide-title-area {
+        font-size: 32px;
+        letter-spacing: 8px;
+      }
+      
+      .slide-right-content {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+      
+      .slide-item {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      
+      .slide-number {
+        font-size: 28px;
+      }
+      
+      .slide-item-title {
+        font-size: 20px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .slide-layout {
+        flex-direction: column;
+      }
+      
+      .slide-left-nav {
+        width: 100%;
+        height: 200px;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      
+      .slide-title-area {
+        font-size: 28px;
+        letter-spacing: 6px;
+        text-align: center;
+      }
+      
+      .slide-decoration {
+        display: none;
+      }
+      
+      .slide-right-content {
+        flex: 1;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      
+      .slide-grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(8, 1fr);
+        gap: 12px;
+      }
+      
+      .slide-item {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      
+      .slide-number {
+        font-size: 24px;
+        min-width: 40px;
+      }
+      
+      .slide-item-title {
+        font-size: 18px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .slide-left-nav {
+        height: 150px;
+        padding-top: 15px;
+      }
+      
+      .slide-title-area {
+        font-size: 24px;
+        letter-spacing: 4px;
+      }
+      
+      .slide-right-content {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      
+      .slide-item {
+        gap: 12px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      
+      .slide-number {
+        font-size: 20px;
+        min-width: 30px;
+      }
+      
+      .slide-item-title {
+        font-size: 16px;
+      }
     }
   </style>
 </head>

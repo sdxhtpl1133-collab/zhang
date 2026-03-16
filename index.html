@@ -211,12 +211,55 @@
         
         // 切换全屏模式
         function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    showTempMessage('无法切换全屏模式', 2000);
-                });
+            if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+                // 尝试不同浏览器的全屏API
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(err => {
+                        handleFullscreenError(err);
+                    });
+                } else if (document.documentElement.mozRequestFullScreen) {
+                    document.documentElement.mozRequestFullScreen().catch(err => {
+                        handleFullscreenError(err);
+                    });
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    // 对于iOS设备，需要特殊处理
+                    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+                        showTempMessage('在iOS设备上，请使用屏幕旋转锁定并最大化浏览器窗口', 3000);
+                    } else {
+                        document.documentElement.webkitRequestFullscreen().catch(err => {
+                            handleFullscreenError(err);
+                        });
+                    }
+                } else if (document.documentElement.msRequestFullscreen) {
+                    document.documentElement.msRequestFullscreen().catch(err => {
+                        handleFullscreenError(err);
+                    });
+                } else {
+                    showTempMessage('您的浏览器不支持全屏模式', 2000);
+                }
             } else {
-                document.exitFullscreen();
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+        
+        // 处理全屏错误
+        function handleFullscreenError(err) {
+            console.error('全屏错误:', err);
+            // 根据错误类型显示不同的提示
+            if (err.name === 'NotAllowedError') {
+                showTempMessage('需要用户交互才能切换全屏模式', 2000);
+            } else if (err.name === 'SecurityError') {
+                showTempMessage('安全限制阻止了全屏模式', 2000);
+            } else {
+                showTempMessage('无法切换全屏模式', 2000);
             }
         }
         
@@ -331,14 +374,19 @@
                 }
             });
             
-            // 全屏状态变化
-            document.addEventListener('fullscreenchange', () => {
-                if (document.fullscreenElement) {
+            // 全屏状态变化 - 支持不同浏览器
+            document.addEventListener('fullscreenchange', updateFullscreenButton);
+            document.addEventListener('mozfullscreenchange', updateFullscreenButton);
+            document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+            document.addEventListener('MSFullscreenChange', updateFullscreenButton);
+            
+            function updateFullscreenButton() {
+                if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
                     fullscreenBtn.textContent = '⤦';
                 } else {
                     fullscreenBtn.textContent = '⛶';
                 }
-            });
+            }
         }
         
         // 初始化

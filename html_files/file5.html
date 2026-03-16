@@ -101,6 +101,104 @@
       text-align: center;
       line-height: 1.5 !important;
     }
+    
+    /* 响应式设计 */
+    @media (max-width: 1024px) {
+      .slide-title {
+        font-size: 30px !important;
+        line-height: 44px !important;
+        padding-top: 36px;
+      }
+      
+      .slide-grid {
+        width: 90%;
+        height: 480px;
+        gap: 16px;
+      }
+      
+      .slide-card {
+        padding: 24px;
+      }
+      
+      .slide-card-icon {
+        font-size: 40px;
+        margin-bottom: 16px;
+      }
+      
+      .slide-card-title {
+        font-size: 20px !important;
+        margin-bottom: 10px;
+      }
+      
+      .slide-card-desc {
+        font-size: 16px !important;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .slide-title {
+        font-size: 24px !important;
+        line-height: 36px !important;
+        padding-top: 24px;
+      }
+      
+      .slide-grid {
+        width: 90%;
+        height: auto;
+        margin-top: 16px;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+        gap: 12px;
+        min-height: 500px;
+      }
+      
+      .slide-card {
+        padding: 20px;
+      }
+      
+      .slide-card-icon {
+        font-size: 32px;
+        margin-bottom: 12px;
+      }
+      
+      .slide-card-title {
+        font-size: 18px !important;
+      }
+      
+      .slide-card-desc {
+        font-size: 14px !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .slide-title {
+        font-size: 20px !important;
+        line-height: 30px !important;
+        padding-top: 16px;
+      }
+      
+      .slide-grid {
+        width: 95%;
+        gap: 8px;
+      }
+      
+      .slide-card {
+        padding: 16px;
+      }
+      
+      .slide-card-icon {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+      
+      .slide-card-title {
+        font-size: 16px !important;
+      }
+      
+      .slide-card-desc {
+        font-size: 12px !important;
+      }
+    }
   </style>
 </head>
 <body>
